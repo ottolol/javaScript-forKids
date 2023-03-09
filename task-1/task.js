@@ -9,3 +9,11 @@ stringWithoutFirstSimbol = stringWithoutFirstSimbol.toLowerCase();
 str = firstSimbol + stringWithoutFirstSimbol;
 
 console.log(str); //Эй, как дела?
+
+
+//так же можно сократить код
+var firstSimbol = str.slice(0, 1).toUpperCase();
+var stringWithoutFirstSimbol = str.slice(1).toLowerCase();
+str = firstSimbol + stringWithoutFirstSimbol;
+
+console.log(str); //Эй, как дела?
