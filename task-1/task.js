@@ -27,3 +27,8 @@ var firstCharacterUpper = firstCharacter.toUpperCase();
 var restOfString = lowerString.slice(1);
 sillyString = firstCharacterUpper + restOfString;
 console.log(sillyString); //Эй, как дела?
+
+//скращаем код
+var sillyString = "эЙ, кАК деЛа?";
+sillyString = sillyString[0].toUpperCase() + sillyString.slice(1).toLowerCase();
+console.log(sillyString); //Эй, как дела?
