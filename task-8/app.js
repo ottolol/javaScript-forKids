@@ -1,4 +1,4 @@
-//создаем массив со словами
+// создаем массив со словами
 let words = [
     "программа",
     "макака",
@@ -6,24 +6,40 @@ let words = [
     "оладушек"
 ];
 
-//выбираем рандомное слово для угадывания
-let word = Math.floor(Math.random() * words.length);
+// выбираем рандомное слово для угадывания
+let word = words[Math.floor(Math.random() * words.length)];
 
-//итоговый массив с ответом
+// создаем итоговый массив
 let answerArray = [];
-for (let i = 0; i < answerArray.length; i++) {
+for (let i = 0; i < word.length; i++) {
     answerArray[i] = "_";
 };
 
-//оставшиеся буквы
+// оставшиеся буквы
 let remainingLetters = word.length;
 
-//программируем игровой цикл
+// программируем игровой цикл
 while (remainingLetters > 0) {
     alert(answerArray.join(" "));
-    // Основной код
-    // Показываем состояние игры
-    // Запрашиваем вариант ответа
-    // Обновляем answerArray и remainingLetters для каждого
-    // вхождения угаданной буквы
-}
+    // запрашиваем вариант ответа и кладем ответ игрока в переменную guess
+    let guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
+
+    if (guess === null) {
+        // если игрок нажал Отмена, то программа завершается и мы выходим из игрового цикла
+        break;
+    } else if (guess.length !== 1) {
+        // если игрок введ более, чем одну букву, программа выдаст предупреждение
+        alert("Пожалуйста, введите только одну букву.");
+    } else {
+        // Обновляем состояние игры
+        for (let j = 0; j < word.length; j++) {
+            if (word[j] === guess) {
+                answerArray[j] = guess;
+                remainingLetters--;
+            }
+        };
+    };
+};
+
+alert(answerArray.join(" "));
+alert("Отлично! Было загадано слово " + word);
