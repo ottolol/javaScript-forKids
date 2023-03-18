@@ -32,9 +32,9 @@ let numberOfAttempts = remainingLetters * 2;
 // программируем игровой цикл
 while (remainingLetters > 0 && numberOfAttempts > 0) {
     alert(answerArray.join(" "));
-    numberOfAttempts--;
+    
     // запрашиваем вариант ответа и кладем ответ игрока в переменную guess
-    let guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.").toLowerCase();
+    let guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
 
     if (guess === null) {
         // если игрок нажал Отмена, то программа завершается и мы выходим из игрового цикла
@@ -43,19 +43,23 @@ while (remainingLetters > 0 && numberOfAttempts > 0) {
         // если игрок введ более, чем одну букву, программа выдаст предупреждение
         alert("Пожалуйста, введите только одну букву.");
     } else {
+        numberOfAttempts--;
+        guess = guess.toLowerCase();
         // Обновляем состояние игры
         for (let j = 0; j < word.length; j++) {
-            if (word[j] === guess) {
+            if (word[j] === guess && answerArray[j] === "_") {
                 answerArray[j] = guess;
                 remainingLetters--;
+                console.log(remainingLetters);
             }
         };
     };
 };
 
+alert(answerArray.join(" "));
+
 if (numberOfAttempts === 0) {
-    alert("Увы, Вы не отгадали слово. Попробуйте еще разок!");
+    alert("Увы, Вы не отгадали слово. Было загадано слово " + word);
 } else {
-    alert(answerArray.join(" "));
     alert("Отлично! Было загадано слово " + word);
 }
