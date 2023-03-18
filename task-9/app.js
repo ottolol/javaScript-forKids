@@ -30,7 +30,7 @@ let remainingLetters = word.length;
 while (remainingLetters > 0) {
     alert(answerArray.join(" "));
     // запрашиваем вариант ответа и кладем ответ игрока в переменную guess
-    let guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
+    let guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.").toLowerCase();
 
     if (guess === null) {
         // если игрок нажал Отмена, то программа завершается и мы выходим из игрового цикла
