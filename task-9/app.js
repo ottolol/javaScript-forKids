@@ -26,9 +26,13 @@ for (let i = 0; i < word.length; i++) {
 // оставшиеся буквы
 let remainingLetters = word.length;
 
+// количество попыток
+let numberOfAttempts = remainingLetters * 2;
+
 // программируем игровой цикл
-while (remainingLetters > 0) {
+while (remainingLetters > 0 && numberOfAttempts > 0) {
     alert(answerArray.join(" "));
+    numberOfAttempts--;
     // запрашиваем вариант ответа и кладем ответ игрока в переменную guess
     let guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.").toLowerCase();
 
@@ -49,5 +53,9 @@ while (remainingLetters > 0) {
     };
 };
 
-alert(answerArray.join(" "));
-alert("Отлично! Было загадано слово " + word);
+if (numberOfAttempts === 0) {
+    alert("Увы, Вы не отгадали слово. Попробуйте еще разок!");
+} else {
+    alert(answerArray.join(" "));
+    alert("Отлично! Было загадано слово " + word);
+}
