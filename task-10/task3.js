@@ -1,4 +1,4 @@
-let pickWord = function () {
+function pickWord() {
     // Возвращает случайно выбранное слово
     let words = [
         "программа",
@@ -11,7 +11,8 @@ let pickWord = function () {
 
     return words[Math.floor(Math.random() * words.length)];
 };
-let setupAnswerArray = function (word) {
+
+function setupAnswerArray(word) {
     // Возвращает итоговый массив для заданного слова word
     let answerArray = [];
     for (let i = 0; i < word.length; i++) {
@@ -20,15 +21,15 @@ let setupAnswerArray = function (word) {
 
     return answerArray;
 };
-let showPlayerProgress = function (answerArray) {
+function showPlayerProgress(answerArray) {
     // С помощью alert отображает текущее состояние игры\
     alert(answerArray.join(" "));
 };
-let getGuess = function () {
+function getGuess() {
     // Запрашивает ответ игрока с помощью prompt
     return prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
 };
-let updateGameState = function (guess, word, answerArray) {
+function updateGameState(guess, word, answerArray) {
     // Обновляет answerArray согласно ответу игрока (guess)
     // возвращает число, обозначающее, сколько раз буква guess
     // встречается в слове, чтобы можно было обновить значение
@@ -43,10 +44,10 @@ let updateGameState = function (guess, word, answerArray) {
 
     return appearances;
 };
-let showAnswerAndCongratulatePlayer = function (answerArray) {
+function showAnswerAndCongratulatePlayer(answerArray) {
     // С помощью alert показывает игроку отгаданное слово
     showPlayerProgress(answerArray);
-    
+
     // и поздравляет его с победой
     alert("Отлично! Было загадано слово " + answerArray.join(""));
 };
