@@ -50,7 +50,6 @@ while (remainingLetters > 0 && numberOfAttempts > 0) {
             if (word[j] === guess && answerArray[j] === "_") {
                 answerArray[j] = guess;
                 remainingLetters--;
-                console.log(remainingLetters);
             }
         };
     };
