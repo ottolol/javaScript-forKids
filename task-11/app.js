@@ -7,5 +7,7 @@
 //     $("body").append("<p>" + hobby + "</p>");
 // }
 
-$("h1").fadeOut(3000).fadeIn(2000);
-$("p").text("Этот текст скоро исчезнет").fadeOut(3000);
+// $("h1").fadeOut(3000).fadeIn(2000);
+// $("p").text("Этот текст скоро исчезнет").fadeOut(3000);
+
+$("h1").slideUp(1000).slideDown(1000);
