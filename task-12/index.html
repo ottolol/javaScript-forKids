@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практикую jQuery и DOM</title>
+</head>
+
+<body>
+    <h1>Привет мир!</h1>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        /*
+        #1. Перечислите своих друзей (и сделайте их лучшими!)
+         
+        Создайте массив с именами нескольких друзей. В цикле for 
+        создайте для каждого имени по одному элементу p и добавьте  
+        эти элементы в конец <body>, вызывая jQuery-метод append.
+          
+        С помощью jQuery измените текст элемента h1, чтобы вместо  
+        "Привет, мир!" там было "Мои друзья". Используйте метод  
+        hide и метод fadeIn, чтобы имена плавно возникали на экране. 
+        Теперь измените созданные вами элементы p, добавив после  
+        каждого имени слово "лучший!". Подсказка: если найти сразу  
+        все элементы p с помощью $("p"), метод append можно вызвать  
+        для них всех разом.
+        */
+        let namesOfMyFriends = [
+            "Леха",
+            "Боря",
+            "Вова",
+            "Андрей"
+        ];
+
+        for (let i = 0; i < namesOfMyFriends.length; i++) {
+            $("body").append("<p>" + namesOfMyFriends[i] + "</p>");
+        };
+
+        $("p").hide().fadeIn(3000).append(" лучший!");
+
+        $("h1").text("Мои друзья");
+    </script>
+</body>
+
+</html>
