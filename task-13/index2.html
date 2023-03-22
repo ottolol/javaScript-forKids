@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практикую интерактивное программирование</title>
+</head>
+
+<body>
+    <h1 id="heading">Привет, мир!</h1>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        /*
+        # 2. Создайте собственную анимацию<br>
+        Используйте ```setInterval``` для анимации заголовка ```h1```, двигая его по квадрату, вдоль краев страницы. 
+        Пусть он переместится на 200 пикселей вправо, на 200 пикселей вниз, 200 пикселей влево, 200 пикселей вверх, 
+        а затем начнет с начала.<br>
+        Подсказка: нужно запоминать текущее направление (вправо, вниз, влево или вверх), чтобы знать, увеличивать или уменьшать 
+        для заголовка отступы слева (left) и сверху (top). Кроме того, при достижении угла квадрата нужно будет менять направление.
+        */
+
+        var direction = 'right';
+        var offset = 0;
+
+        $("#heading").offset({ left: offset, top: offset });
+
+        var moveHeading = function () {
+
+            if (direction === 'right') {
+                $("#heading").offset({ left: offset });
+                offset++;
+                if (offset > 200) {
+                    offset = 0;
+                    direction = 'down';
+                }
+            } else if (direction === 'down') {
+                $("#heading").offset({ top: offset });
+                offset++;
+                if (offset > 200) {
+                    offset = 200;
+                    direction = 'left';
+                }
+            } else if (direction === 'left') {
+                $("#heading").offset({ left: offset });
+                offset--;
+                if (offset < 0) {
+                    offset = 200;
+                    direction = 'up';
+                }
+            } else if (direction === 'up') {
+                $("#heading").offset({ top: offset });
+                offset--;
+                if (offset < 0) {
+                    offset = 0;
+                    direction = 'right';
+                }
+            }
+        };
+
+        setInterval(moveHeading, 10);
+    </script>
+</body>
+
+</html>
