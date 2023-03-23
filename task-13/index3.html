@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практикую интерактивное программирование</title>
+</head>
+
+<body>
+    <h1 id="heading">Привет, мир!</h1>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        /*
+        # 3. Остановка анимации по клику<br>
+        Доработайте упражнение #2: добавьте к двигающемуся элементу ```h1``` обработчик клика, который останавливает анимацию. 
+        Подсказка: отменить запуск кода по интервалу можно функцией ```clearInterval```.
+        */
+
+        var direction = 'right';
+        var offset = 0;
+
+        $("#heading").offset({ left: offset, top: offset });
+
+        var moveHeading = function () {
+
+            if (direction === 'right') {
+                $("#heading").offset({ left: offset });
+                offset++;
+                if (offset > 200) {
+                    offset = 0;
+                    direction = 'down';
+                }
+            } else if (direction === 'down') {
+                $("#heading").offset({ top: offset });
+                offset++;
+                if (offset > 200) {
+                    offset = 200;
+                    direction = 'left';
+                }
+            } else if (direction === 'left') {
+                $("#heading").offset({ left: offset });
+                offset--;
+                if (offset < 0) {
+                    offset = 200;
+                    direction = 'up';
+                }
+            } else if (direction === 'up') {
+                $("#heading").offset({ top: offset });
+                offset--;
+                if (offset < 0) {
+                    offset = 0;
+                    direction = 'right';
+                }
+            }
+        };
+
+        let timer = setInterval(moveHeading, 10);
+
+        $("#heading").click(function (event) {
+            clearInterval(timer);
+        });
+
+       
+
+
+    </script>
+</body>
+
+</html>
