@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практикую интерактивное программирование</title>
+</head>
+
+<body>
+    <h1 id="heading">Привет, мир!</h1>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        /*
+        # 4. Напишите игру «Кликни по заголовку»<br>
+        Доработайте упражнение #3 так, чтобы каждый раз, когда игрок кликает по заголовку, тот не останавливался, 
+        а ускорялся и кликнуть по нему становилось сложнее. Отслеживайте количество кликов по заголовку и меняйте его текст, 
+        отображая там это число. Когда игрок наберет 10 кликов, остановите анимацию, а текст заголовка измените на ```«Вы победили!»```. 
+        Подсказка: чтобы ускорить движение, нужно будет отменить текущий вызов функции по интервалу, а потом задать новый, 
+        с меньшим временем повтора.
+        */
+
+        var direction = 'right';
+        var offset = 0;
+        var clicks = 0;
+        var interval = 100;
+
+        $("#heading").offset({ left: offset, top: offset });
+
+        var moveHeading = function () {
+
+            if (direction === 'right') {
+                $("#heading").offset({ left: offset });
+                offset++;
+                if (offset > 200) {
+                    offset = 0;
+                    direction = 'down';
+                }
+            } else if (direction === 'down') {
+                $("#heading").offset({ top: offset });
+                offset++;
+                if (offset > 200) {
+                    offset = 200;
+                    direction = 'left';
+                }
+            } else if (direction === 'left') {
+                $("#heading").offset({ left: offset });
+                offset--;
+                if (offset < 0) {
+                    offset = 200;
+                    direction = 'up';
+                }
+            } else if (direction === 'up') {
+                $("#heading").offset({ top: offset });
+                offset--;
+                if (offset < 0) {
+                    offset = 0;
+                    direction = 'right';
+                }
+            }
+        };
+
+        var timer = setInterval(moveHeading, interval);
+
+        $("#heading").click(function (event) {
+            clearInterval(timer);
+            interval /= 2;
+            clicks++;
+            $("#heading").text("Привет, мир! Клик: " + clicks);
+            
+            if (clicks > 10) {
+                $("#heading").text("Вы победили!");
+            } else {
+                timer = setInterval(moveHeading, interval);
+            }
+        });
+    </script>
+</body>
+
+</html>
