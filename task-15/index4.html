@@ -65,8 +65,13 @@
         // Добавляем элементу img обработчик клика
         $("#map").click(function (event) {
             clicks++;
-            clicksLimit--;
-            $("#clicksLimit").text("Осталось кликов: " + clicksLimit);
+
+            if (clicks > clicksLimit) {
+                alert("КОНЕЦ ИГРЫ!");
+                return;
+            }
+            // Отображение числа оставшихся кликов
+            $("#clicksLimit").text("Осталось кликов: " + (clicksLimit - clicks));
             // Получаем расстояние от места клика до клада
             var distance = getDistance(event, target);
             // Преобразуем расстояние в подсказку
@@ -76,8 +81,6 @@
             // Если клик был достаточно близко, поздравляем с победой
             if (distance < 8) {
                 alert("Клад найден! Сделано кликов: " + clicks);
-            } else if (clicks > 15) {
-                alert("КОНЕЦ ИГРЫ!");
             }
         });
     </script>
