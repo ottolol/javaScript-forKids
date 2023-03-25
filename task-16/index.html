@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практикуюсь с объектами</title>
+</head>
+
+<body>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        var speak = function () {
+            console.log(this.sound + " Меня зовут " + this.name + "!");
+        };
+
+        var dog = {
+            name: "Оладушек",
+            sound: "Гав-Гав, я Пес!",
+            speak: speak,
+            legs: 4,
+            isAwesome: true
+        };
+        dog.age = 6;
+        
+        var cat = {
+            name: "Морсик",
+            sound: "Мур-Мяу, я Кот!",
+            speak: speak,
+            legs: 4,
+            isAwesome: true
+        };
+        var pig = {
+            sound: "Хрю",
+            name: "Чарли",
+            speak: speak
+        };
+        var horse = {
+            sound: "И-го-го",
+            name: "Мэри",
+            speak: speak
+        };
+
+        console.log(dog.speak());
+        console.log(cat.speak());
+        console.log(pig.speak());
+        console.log(horse.speak());
+    </script>
+</body>
+
+</html>
