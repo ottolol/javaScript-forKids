@@ -9,15 +9,19 @@
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" width="300" height="300"></canvas>
 
     <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
     <script>
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
-        for (var i = 0; i < 8; i++) {
-            ctx.fillRect(i * 10, i * 10, 10, 10);
-        }
+        ctx.fillRect(40, 0, 50, 50); // голова
+        ctx.fillRect(60, 50, 10, 30); // шея
+        ctx.fillRect(0, 70, 60, 10); // левая рука
+        ctx.fillRect(70, 70, 60, 10); // правая рука
+        ctx.fillRect(30, 80, 70, 60); // туловище
+        ctx.fillRect(30, 130, 10, 60); // левая нога
+        ctx.fillRect(90, 130, 10, 60); // правая нога
     </script>
 </body>
 
