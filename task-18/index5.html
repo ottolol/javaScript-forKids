@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изучаю CANVAS</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "MediumPurple";
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+        ctx.lineTo(100, 60);
+        ctx.lineTo(130, 30);
+        ctx.lineTo(160, 60);
+        ctx.lineTo(160, 100);
+        ctx.lineTo(100, 100);
+        ctx.fill();
+    </script>
+</body>
+
+</html>
