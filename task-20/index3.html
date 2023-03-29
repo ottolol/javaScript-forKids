@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рисование мышкой</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        function circle(x, y, radius, fillCircle) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            fillCircle ? ctx.fill() : ctx.stroke();
+        };
+
+        // это написал я
+        // $("html").mousemove(function (event) {
+        //     $("#canvas").offset({
+        //         left: event.pageX,
+        //         top: event.pageY
+        //     });
+
+        //     ctx.lineWidth = 3;
+        //     ctx.strokeStyle = "MediumPurple";
+        //     circle(25, 25, 10);
+        // });
+
+        // это написал учитель в книге
+        $("canvas").mousemove(function (event) {
+            circle(event.offsetX, event.offsetY, 3, true);
+        });
+    </script>
+</body>
+
+</html>
