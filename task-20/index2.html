@@ -16,14 +16,14 @@
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
 
-        var points = [[50, 50], [50, 100], [100, 100], [100, 50], [50, 50]];
+        //var points = [[50, 50], [50, 100], [100, 100], [100, 50], [50, 50]];
 
-        function drawPoints(points) {
+        function drawPoints(mysteryPoints) {
             ctx.fillStyle = "MediumPurple";
             ctx.beginPath();
 
-            for (let i = 0; i < points.length; i++) {
-                let point = points[i];
+            for (let i = 0; i < mysteryPoints.length; i++) {
+                let point = mysteryPoints[i];
 
                 for (let j = 0; j < point.length; j++) {
                     ctx.lineTo(point[j], point[j + 1]);
@@ -32,7 +32,10 @@
             ctx.fill();
         };
 
-        drawPoints(points);
+        //drawPoints(points);
+
+        var mysteryPoints = [[50, 50], [50, 100], [25, 120], [100, 50], [70, 90], [100, 90], [70, 120]];
+        drawPoints(mysteryPoints);
     </script>
 </body>
 
