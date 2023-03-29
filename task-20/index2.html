@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рисуем квадрат</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var points = [[50, 50], [50, 100], [100, 100], [100, 50], [50, 50]];
+
+        function drawPoints(points) {
+            ctx.fillStyle = "MediumPurple";
+            ctx.beginPath();
+
+            for (let i = 0; i < points.length; i++) {
+                let point = points[i];
+
+                for (let j = 0; j < point.length; j++) {
+                    ctx.lineTo(point[j], point[j + 1]);
+                };
+            };
+            ctx.fill();
+        };
+
+        drawPoints(points);
+    </script>
+</body>
+
+</html>
