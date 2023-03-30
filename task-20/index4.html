@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Человечек в «Виселице»</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "Turquoise";
+        ctx.lineWidth = 4;
+
+
+        // создаем массив со словами
+        let words = [
+            "программа",
+            "макака",
+            "прекрасный",
+            "оладушек",
+            "картошка",
+            "помидор",
+            "огурец",
+            "школа",
+            "институт",
+            "работа",
+            "музыка",
+            "кино"
+        ];
+
+        // выбираем рандомное слово для угадывания
+        let word = words[Math.floor(Math.random() * words.length)];
+
+        // создаем итоговый массив
+        let answerArray = [];
+        for (let i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        };
+
+        // оставшиеся буквы
+        let remainingLetters = word.length;
+
+        // количество попыток
+        // let numberOfAttempts = remainingLetters * 2;
+        let numberOfAttempts = remainingLetters;
+
+        // программируем игровой цикл
+        while (remainingLetters > 0 && numberOfAttempts > 0) {
+            alert(answerArray.join(" "));
+
+            // запрашиваем вариант ответа и кладем ответ игрока в переменную guess
+            let guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
+
+            if (guess === null) {
+                // если игрок нажал Отмена, то программа завершается и мы выходим из игрового цикла
+                break;
+            } else if (guess.length !== 1) {
+                // если игрок введ более, чем одну букву, программа выдаст предупреждение
+                alert("Пожалуйста, введите только одну букву.");
+            } else {
+                numberOfAttempts--;
+                guess = guess.toLowerCase();
+                // Обновляем состояние игры
+                for (let j = 0; j < word.length; j++) {
+                    if (word[j] === guess && answerArray[j] === "_") {
+                        answerArray[j] = guess;
+                        remainingLetters--;
+                    }
+                };
+            };
+        };
+
+        alert(answerArray.join(" "));
+
+        if (numberOfAttempts === 0) {
+            alert("Увы, Вы не отгадали слово. Было загадано слово " + word);
+        } else {
+            alert("Отлично! Было загадано слово " + word);
+        };
+
+        function rightAnswer() {
+            let rightAnswer = 0;
+            let wrongAnswer = [];
+            for (let i = 0; i < answerArray.length; i++) {
+                if (answerArray[i] === "_") {
+                    wrongAnswer.push(i);
+                }
+            }
+            rightAnswer = answerArray.length - wrongAnswer.length;
+            return rightAnswer;
+        };
+
+        function rightAnswerPrint(func) {
+            let rightAnswer = func();
+            if (rightAnswer === 0 || rightAnswer === 1) {
+                ctx.strokeRect(100, 0, 20, 20); // голова
+            } else if (rightAnswer === 2 || rightAnswer === 3) {
+                ctx.strokeRect(100, 0, 20, 20); // голова
+                ctx.beginPath();
+                // тело
+                ctx.moveTo(110, 20);
+                ctx.lineTo(110, 70);
+                // левая рука
+                ctx.moveTo(110, 40);
+                ctx.lineTo(90, 30);
+                // правая рука
+                ctx.moveTo(110, 40);
+                ctx.lineTo(130, 30);
+                ctx.stroke();
+            } else if (rightAnswer === 4 || rightAnswer === 5) {
+                ctx.strokeRect(100, 0, 20, 20); // голова
+                ctx.beginPath();
+                // тело
+                ctx.moveTo(110, 20);
+                ctx.lineTo(110, 70);
+                // левая рука
+                ctx.moveTo(110, 40);
+                ctx.lineTo(90, 30);
+                // правая рука
+                ctx.moveTo(110, 40);
+                ctx.lineTo(130, 30);
+                // левая нога
+                ctx.moveTo(110, 70);
+                ctx.lineTo(90, 100);
+                // правая нога
+                ctx.moveTo(110, 70);
+                ctx.lineTo(130, 100);
+                ctx.stroke();
+            }
+        };
+
+        rightAnswerPrint(rightAnswer);
+    </script>
+</body>
+
+</html>
