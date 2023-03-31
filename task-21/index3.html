@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Случайная пчела</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        var circle = function (x, y, radius, fillCircle) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+
+            fillCircle ? ctx.fill() : ctx.stroke();
+        };
+
+        // рисуем пчелу
+        var drawBee = function (x, y) {
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "Black";
+            ctx.fillStyle = "Gold";
+
+            circle(x, y, 8, true);
+            circle(x, y, 8, false);
+            circle(x - 5, y - 11, 5, false);
+            circle(x + 5, y - 11, 5, false);
+            circle(x - 2, y - 1, 2, false);
+            circle(x + 2, y - 1, 2, false);
+        };
+
+        // изменение позиции пчелы
+        var update = function (coordinate) {
+            var offset = Math.random() * 4 - 2;
+            // изменяем координату на величину смещения
+            coordinate += offset;
+
+            // проверка выхода за границу
+            if (coordinate > 200) {
+                coordinate = 200;
+            }
+            if (coordinate < 0) {
+                coordinate = 0;
+            }
+
+            // возвращаем обновленную координату
+            return coordinate;
+        };
+
+        // анимируем пчелу
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var x = 100;
+        var y = 100;
+
+        setInterval(function () {
+            // очищаем «холст» вызовом clearRect
+            ctx.clearRect(0, 0, 200, 200);
+            
+            // рисуем пчелу
+            drawBee(x, y);
+
+            // обновляем значения x и y
+            // функция update принимает число, добавляет к нему случайное значение в диапазоне от −2 до 2 и возвращает обновленное число
+            x = update(x);
+            y = update(y);
+
+            // вызываем strokeRect, чтобы обвести рамкой границы «холста» — чтобы было ясно, когда пчела подлетает к границе
+            ctx.strokeRect(0, 0, 200, 200);
+        }, 30);
+    </script>
+</body>
+
+</html>
