@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отскакивающий мяч</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        // конструктор Ball
+        var Ball = function () {
+            this.x = width / 2;
+            this.y = height / 2;
+            this.xSpeed = Math.random() * 5;
+            this.ySpeed = Math.random() * 5;
+        };
+
+        // рисуем мяч
+        var circle = function (x, y, radius, fillCircle) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+
+            fillCircle ? ctx.fill() : ctx.stroke();
+        };
+
+        Ball.prototype.draw = function () {
+            circle(this.x, this.y, 3, true);
+        };
+
+        // перемещение мяча
+        Ball.prototype.move = function () {
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+        };
+
+        // отскоки мяча
+        Ball.prototype.checkCollision = function () {
+            if (this.x < 0 || this.x > width) {
+                this.xSpeed = -this.xSpeed;
+            }
+            if (this.y < 0 || this.y > height) {
+                this.ySpeed = -this.ySpeed;
+            }
+        };
+
+        // анимация мяча
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var width = canvas.width;
+        var height = canvas.height;
+
+        // создаем объект-мяч вызовом new Ball() и сохраняем его в переменной ball
+        var ball = new Ball();
+
+        // вызываем setInterval, передавая первым аргументом функцию, а вторым — число 30
+        setInterval(function () {
+            // очищаем «холст» командой ctx.clearRect(0, 0, 200, 200)
+            ctx.clearRect(0, 0, width, height);
+
+            // вызывает методы объекта ball: draw, move, и checkCollision
+            // метод draw рисует мяч в его текущей позиции (x, y)
+            ball.draw();
+
+            // метод move обновляет позицию мяча на основе значений xSpeed и ySpeed
+            ball.move();
+
+            // метод checkCollision меняет направление движения мяча, если тот столкнулся с границей «холста»
+            ball.checkCollision();
+
+            // рисуем вокруг «холста» рамку — чтобы границы, от которых отскакивает мяч, были видимы
+            ctx.strokeRect(0, 0, width, height);
+
+        }, 30);
+    </script>
+</body>
+
+</html>
