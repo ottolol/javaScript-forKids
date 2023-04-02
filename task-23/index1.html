@@ -14,8 +14,25 @@
     <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
     <script>
         // Добавим обработчик события keydown
+        // $("body").keydown(function (event) {
+        //     console.log(event.keyCode);
+        // });
+
+        // Перевод кодов в названия с помощью объекта
+        var keyNames = {
+            32: "space", //пробел
+            37: "left", //влево
+            38: "up", //вверх
+            39: "right", //вправо
+            40: "down", //вниз
+            // add SHIFT, ENTER/RETURN, и ALT/OPTION.
+            16: "shift",
+            13: "enter/return",
+            18: "alt/option",
+        };
+
         $("body").keydown(function (event) {
-            console.log(event.keyCode);
+            console.log(keyNames[event.keyCode]);
         });
     </script>
 </body>
