@@ -29,7 +29,14 @@
             16: "shift",
             13: "enter/return",
             18: "alt/option",
+            name: "list if keyNames"
         };
+
+        // чтобы получить значение числового ключа, нужно писать в квардатных скобках, как массив - keyNames[32]
+        console.log("keyNames.32 is: " + keyNames[32]);
+
+        // чтобы получить значение строкового ключа, пишем - keyNames.name
+        console.log("keyNames.name is: " + keyNames.name);
 
         $("body").keydown(function (event) {
             console.log(keyNames[event.keyCode]);
