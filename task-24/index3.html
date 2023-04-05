@@ -37,6 +37,7 @@
             this.xSpeed = 1;
             this.ySpeed = 0;
             this.speed = 1;
+            this.size = 10;
         };
 
         // Обновляем позицию мяча соответственно его скорости
@@ -70,7 +71,7 @@
 
         // Рисуем мяч в его текущей позиции
         Ball.prototype.draw = function () {
-            circle(this.x, this.y, 10, true);
+            circle(this.x, this.y, this.size, true);
         };
 
         // Задаем направление движения по строке с названием действия
@@ -119,20 +120,20 @@
                 this.speed = 9;
             };
 
-            var spd = this.speed;
-
             if (speed === "z") {
-                var speedTimeOut = setTimeout(function () {
-                    console.log(spd);
-                    while (spd > 0) {
-                        spd--;
-                        console.log(spd);
-                    };
-                }, 10);
-            } else {
-                clearInterval(speedTimeOut);
-            }
+                this.speed = this.speed - 1;
+            } else if (speed === "x") {
+                this.speed = this.speed + 1;
+            };
         };
+
+        Ball.prototype.setSize = function (size) {
+			if (size === "c") { // уменьшается
+				this.size = this.size - 1;
+			} else if (size === "v") { // увеличивается
+				this.size = this.size + 1;
+			};
+		};
 
         // Реакция на нажатия клавиш
         // создаем объект мяча вызовом new Ball()
@@ -159,10 +160,14 @@
             56: "8",
             57: "9",
             90: "z", // замедляется
-            88: "x", // разгоняется
-            67: "c", // уменьшается
-            86: "v" // увеличивается
+            88: "x" // разгоняется
         };
+        
+        // создал новый объект sizes
+		var sizes = {
+			67: "c", // уменьшается
+            86: "v" // увеличивается
+		};
 
         // мы с помощью jQuery-функции $ находим элемент body и вызываем его метод keydown, чтобы обрабатывать события клавиатуры.
         // Функция, переданная в этот метод, будет вызываться каждый раз при нажатии клавиши на клавиатуре
@@ -172,6 +177,9 @@
 
             var speed = speeds[event.keyCode];
             ball.setSpeed(speed);
+
+            var size = sizes[event.keyCode];
+			ball.setSize(size);
         });
 
         // Анимация мяча. Функция анимации, вызывается раз в 30 мс
