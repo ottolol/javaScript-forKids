@@ -15,25 +15,25 @@
     <script>
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
-		var width = canvas.width;
+        var width = canvas.width;
         var height = canvas.height;
-		var blockSize = 10;
+        var blockSize = 10;
         ctx.strokeStyle = "Turquoise";
         ctx.lineWidth = 4;
-		
+
         // создаем массив со словами
         let words = [
-            "программа",
-            /*"макака",
+            /*"программа",
+            "макака",
             "прекрасный",
             "оладушек",
             "картошка",
             "помидор",
             "огурец",
             "школа",
-            "институт",*/
+            "институт",
             "работа",
-            "музыка",
+            "музыка",*/
             "кино"
         ];
 
@@ -45,6 +45,9 @@
         for (let i = 0; i < word.length; i++) {
             answerArray[i] = "_";
         };
+
+        // массив не правильных ответов
+        let wrongAnswer = [];
 
         // оставшиеся буквы
         let remainingLetters = word.length;
@@ -69,15 +72,24 @@
             } else {
                 numberOfAttempts--;
                 guess = guess.toLowerCase();
+                
                 // Обновляем состояние игры
+                let guessFound = false;
                 for (let j = 0; j < word.length; j++) {
                     if (word[j] === guess && answerArray[j] === "_") {
                         answerArray[j] = guess;
                         remainingLetters--;
-                    }
+                        guessFound = true;
+                    };
+                };
+
+                // добавляем все не правильные буквы
+                if (!guessFound) {
+                    wrongAnswer.push(guess);
                 };
             };
         };
+        console.log("wrongAnswer arr is: " + wrongAnswer);
 
         alert(answerArray.join(" "));
 
@@ -89,13 +101,13 @@
 
         function rightAnswer() {
             let rightAnswer = 0;
-            let wrongAnswer = [];
+            let wrongAns = [];
             for (let i = 0; i < answerArray.length; i++) {
                 if (answerArray[i] === "_") {
-                    wrongAnswer.push(i);
+                    wrongAns.push(i);
                 }
             }
-            rightAnswer = answerArray.length - wrongAnswer.length;
+            rightAnswer = answerArray.length - wrongAns.length;
             return rightAnswer;
         };
 
@@ -137,53 +149,67 @@
                 ctx.stroke();
             }
         };
-		rightAnswerPrint(rightAnswer);
-		
-		var ans = [answerArray].toString().replaceAll(',', '');
-		if (alert == "Отлично!") {
-			ans = [answerArray].replaceAll('_', '');
-		};
-		// рисуем слово
-		var drawWord = function () {
-			ctx.font = "20px Courier";
-			ctx.fillStyle = "Black";
-			ctx.textAlign = "left";
-			ctx.letterSpacing = "8.5px";
-			ctx.textBaseline = "top";
-			ctx.fillText(ans, 18, 150);
-		};
-		
-		// рисуем подчеркивание для слова
-		var drawBorderWord = function () {
-			ctx.fillStyle = "Black";
+        rightAnswerPrint(rightAnswer);
 
-			let xCoord = 20;
-			for (let i = 0; i < answerArray.length; i++) {
-				ctx.fillRect(xCoord, 170, 10, 2);
-				xCoord += 20;
-			};
-		};
-		
-		// рисуем рамку
-		var drawBorder = function () {
-			ctx.fillStyle = "Gray";
-			ctx.fillRect(0, 0, width, blockSize);
-			ctx.fillRect(0, height - blockSize, width, blockSize);
-			ctx.fillRect(0, 0, blockSize, height);
-			ctx.fillRect(width - blockSize, 0, blockSize, height);
-		};
-		
-		drawBorder();
-		drawWord();
-		drawBorderWord();
-		
-		/*
-		3. Добавьте вывод текста к «Виселице»
-		Усовершенствуйте игру, используя метод fillText для вывода текущего слова под человечком, как показано на рисунке. 
-		Подсказка: для подчеркивания каждой буквы я использовал линии длиной 30 пикселей, с расстоянием 10 пикселей 
-		между ними.
-		Можете усложнить задачу — отображайте также неправильные ответы в виде зачеркнутых букв, как на рисунке справа.
-		*/
+        // убираем запятые из массива answerArray
+        var ans = [answerArray].toString().replaceAll(',', '');
+        if (alert == "Отлично!") {
+            ans = [answerArray].replaceAll('_', '');
+        };
+
+        // рисуем слово
+        var drawWord = function () {
+            ctx.font = "20px Courier";
+            ctx.fillStyle = "Black";
+            ctx.textAlign = "left";
+            ctx.letterSpacing = "8.5px";
+            ctx.textBaseline = "top";
+            ctx.fillText(ans, 18, 150);
+        };
+
+        // рисуем подчеркивание для слова
+        var drawBorderWord = function () {
+            ctx.fillStyle = "Black";
+
+            let xCoord = 20;
+            for (let i = 0; i < answerArray.length; i++) {
+                ctx.fillRect(xCoord, 170, 10, 2);
+                xCoord += 20;
+            };
+        };
+
+        // рисуем неправильные ответы uniqueWrongAnswerArr
+        var drawWrongAnswer = function () {
+            ctx.font = "20px Courier";
+            ctx.fillStyle = "Black";
+            ctx.textAlign = "left";
+            ctx.letterSpacing = "8.5px";
+            ctx.textBaseline = "top";
+            ctx.fillText(wrongAnswer, 18, 170);
+        };
+
+        // рисуем рамку
+        var drawBorder = function () {
+            ctx.fillStyle = "Gray";
+            ctx.fillRect(0, 0, width, blockSize);
+            ctx.fillRect(0, height - blockSize, width, blockSize);
+            ctx.fillRect(0, 0, blockSize, height);
+            ctx.fillRect(width - blockSize, 0, blockSize, height);
+        };
+
+        drawBorder();
+        drawWord();
+        drawBorderWord();
+        drawWrongAnswer();
+
+        /*
+        3. Добавьте вывод текста к «Виселице»
+        Усовершенствуйте игру, используя метод fillText для вывода текущего слова под человечком, как показано на рисунке. 
+        Подсказка: для подчеркивания каждой буквы я использовал линии длиной 30 пикселей, с расстоянием 10 пикселей 
+        между ними.
+        Можете усложнить задачу — отображайте также неправильные ответы в виде зачеркнутых букв, как на рисунке справа.
+        */
+
     </script>
 </body>
 
