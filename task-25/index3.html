@@ -83,13 +83,12 @@
                     };
                 };
 
-                // добавляем все не правильные буквы
+                // добавляем все не правильные буквы в массив wrongAnswer
                 if (!guessFound) {
                     wrongAnswer.push(guess);
                 };
             };
         };
-        console.log("wrongAnswer arr is: " + wrongAnswer);
 
         alert(answerArray.join(" "));
 
@@ -178,6 +177,9 @@
             };
         };
 
+        // убираем запятые из массива wrongAnswer
+        var wrAns = [wrongAnswer].toString().replaceAll(',', '');
+
         // рисуем неправильные ответы uniqueWrongAnswerArr
         var drawWrongAnswer = function () {
             ctx.font = "20px Courier";
@@ -185,7 +187,18 @@
             ctx.textAlign = "left";
             ctx.letterSpacing = "8.5px";
             ctx.textBaseline = "top";
-            ctx.fillText(wrongAnswer, 18, 170);
+            ctx.fillText(wrAns, 18, 190);
+        };
+
+        // рисуем подчеркивание для неправильных ответов
+        var drawBorderWrongWord = function () {
+            ctx.fillStyle = "Black";
+
+            let xCoord = 17;
+            for (let i = 0; i < wrongAnswer.length; i++) {
+                ctx.fillRect(xCoord, 202, 15, 2);
+                xCoord += 20;
+            };
         };
 
         // рисуем рамку
@@ -201,6 +214,7 @@
         drawWord();
         drawBorderWord();
         drawWrongAnswer();
+        drawBorderWrongWord();
 
         /*
         3. Добавьте вывод текста к «Виселице»
